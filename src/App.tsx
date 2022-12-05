@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NewReminder from "./components/NewReminder";
 
 import ReminderList from "./components/ReminderList";
 import { Reminder } from "./interfaces/Reminder";
@@ -19,8 +20,13 @@ function App(): JSX.Element {
     setReminders((state) => state.filter((item) => item.id !== id));
   };
 
+  const addNewReminder = (title: string): void => {
+    setReminders((state) => [{ id: state.length + 1, title }, ...state]);
+  };
+
   return (
     <main className="container">
+      <NewReminder onFormSubmit={addNewReminder} />
       <ReminderList
         reminders={reminders}
         onReminderDelete={handleReminderDelete}
