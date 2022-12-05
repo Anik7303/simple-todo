@@ -1,4 +1,4 @@
 export interface Reminder {
   id: number;
-  content?: string;
+  title: string;
 }

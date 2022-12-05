@@ -12,9 +12,9 @@ function ReminderList({
 }: ReminderListProps): JSX.Element {
   return (
     <ul className="list-group my-3">
-      {reminders.map(({ id, content }) => (
+      {reminders.map(({ id, title }) => (
         <li className="list-group-item" key={id}>
-          {content}
+          {title}
           <button
             className="btn btn-outline-danger mx-2 rounded-pill"
             onClick={() => onReminderDelete(id)}

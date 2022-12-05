@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ReminderList from "./components/ReminderList";
 import { Reminder } from "./interfaces/Reminder";
+import ReminderService from "./services/reminder";
 
-interface AppProps {}
+function App(): JSX.Element {
+  const [reminders, setReminders] = useState<Reminder[]>([]);
 
-function App(props: AppProps): JSX.Element {
-  const [reminders, setReminders] = useState<Reminder[]>([
-    { id: 1, content: "Reminder 1" },
-    { id: 2, content: "Reminder 2" },
-  ]);
+  const fetchReminders = async (): Promise<void> => {
+    setReminders(await ReminderService.fetchReminders());
+  };
+
+  useEffect(() => {
+    fetchReminders();
+  }, []);
 
   const handleReminderDelete = (id: number): void => {
     setReminders((state) => state.filter((item) => item.id !== id));
